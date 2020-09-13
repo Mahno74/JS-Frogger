@@ -1,0 +1,50 @@
+.grid {
+    border: 1px solid;
+    display: flex;
+    flex-wrap: wrap;
+    height: 180px;
+    width: 180px;
+}
+
+.grid div {
+    height: 20px;
+    width: 20px;
+}
+
+.ending-block {
+    background-color: #f00;
+}
+
+.starting-block {
+    background-image: url('pics/safe-zone.png');
+    background-size: cover;
+}
+
+.c1 {
+    background-image: url('pics/car-right.png');
+    background-size: cover;
+}
+
+.c2, .c3 {
+    background-blend-mode: exclusion;
+    background-image: url('pics/road.png');
+    background-size: cover;
+}
+
+.l1, .l2, .l3 {
+    background-color: #a52a2a;
+}
+
+.l4, .l5 {
+    background-color: lightblue;
+}
+
+.frog-on-lawn {
+    background-image: url('pics/frog.png');
+    background-size: cover;
+}
+
+.frog-on-road {
+    background-image: url('pics/frog-on-road.png');
+    background-size: cover;
+}
