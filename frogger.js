@@ -44,13 +44,17 @@ function moveFrog(e) {
             if (currentIndex + width < width * width) currentIndex += width; /* Down */
             break;
     }
-    if ((currentIndex >= 63 && currentIndex <= 80) || (currentIndex >= 36 && currentIndex <= 44)) {
+    if ((currentIndex >= 63 && currentIndex <= 80) || (currentIndex >= 36 && currentIndex <= 44) || (currentIndex >= 0 && currentIndex <= 17)) {
         squares[currentIndex].classList.add('frog-on-lawn');
     } else if (currentIndex >= 45 && currentIndex <= 62) {
         squares[currentIndex].classList.add('frog-on-road');
+    } else if (currentIndex >= 18 && currentIndex <= 35) {
+        squares[currentIndex].classList.add('frog-on-log');
     }
+
     Lose();
     Win();
+    new Audio('sound/kva.mp3').autoplay = true; //звук GameOver
 }
 
 //move cars
@@ -149,9 +153,9 @@ function moveLogRight(logRight) {
 }
 //rules for Win
 function Win() {
-    if (squares[4].classList.contains('frog')) {
+    if (squares[4].classList.contains('frog-on-lawn')) {
         result.innerHTML = 'YOU WIN!'
-        squares[currentIndex].classList.remove('frog')
+        $("div").removeClassWild("frog-*"); //remove all 'frog'
         clearInterval(timerId)
         document.removeEventListener('keyup', moveFrog)
     }
@@ -160,7 +164,15 @@ function Win() {
 function Lose() {
     if ((currentTime === 0) || (squares[currentIndex].classList.contains('c1')) || (squares[currentIndex].classList.contains('l5')) || (squares[currentIndex].classList.contains('l4'))) {
         result.innerHTML = 'YOU LOSE!'
-        squares[currentIndex].classList.remove('frog')
+        $("div").removeClassWild("frog-*"); //remove all 'frog'
+        if ((currentIndex >= 45 && currentIndex <= 62)) {
+            squares[currentIndex].classList.add('frog-rip-road');
+        } else if (currentIndex >= 18 && currentIndex <= 35) {
+            squares[currentIndex].classList.add('frog-rip-water');
+        } else {
+            squares[currentIndex].classList.add('frog-rip')
+        }
+
         clearInterval(timerId)
         document.removeEventListener('keyup', moveFrog)
     }
@@ -168,9 +180,9 @@ function Lose() {
 //move the frog when its on the log moving left
 function moveWithLogLeft() {
     if (currentIndex >= 27 && currentIndex < 35) {
-        squares[currentIndex].classList.remove('frog')
+        $("div").removeClassWild("frog-*");
         currentIndex += 1
-        squares[currentIndex].classList.add('frog')
+        squares[currentIndex].classList.add('frog-on-log')
     }
 }
 
@@ -178,9 +190,9 @@ function moveWithLogRight() {
     console.log('+');
 
     if (currentIndex > 18 && currentIndex <= 26) {
-        squares[currentIndex].classList.remove('frog')
+        $("div").removeClassWild("frog-*");
         currentIndex -= 1
-        squares[currentIndex].classList.add('frog')
+        squares[currentIndex].classList.add('frog-on-log')
     }
 }
 
@@ -203,8 +215,6 @@ startBtn.addEventListener('click', () => {
         timerId = setInterval(movePieces, 1000)
         document.addEventListener('keyup', moveFrog);
     }
-
-
 })
 
 (function start() {
