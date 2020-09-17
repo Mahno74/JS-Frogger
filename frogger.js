@@ -1,7 +1,7 @@
 const squares = document.querySelectorAll('.grid div');
 const timeLeft = document.querySelector('#time-left');
 const result = document.querySelector('#result');
-const startBtn = document.querySelector('#button');
+// const startBtn = document.querySelector('#button');
 const carsLeft = document.querySelectorAll('.car-left');
 const carsRight = document.querySelectorAll('.car-right');
 const logsLeft = document.querySelectorAll('.log-left');
@@ -54,7 +54,7 @@ function moveFrog(e) {
 
     Lose();
     Win();
-    new Audio('sound/kva.mp3').autoplay = true; //звук GameOver
+    // new Audio('sound/kva.mp3').autoplay = true;
 }
 
 //move cars
@@ -208,14 +208,15 @@ function movePieces() {
 }
 
 //start and pause button
-startBtn.addEventListener('click', () => {
-    if (timerId) {
-        clearInterval(timerId)
-    } else {
-        timerId = setInterval(movePieces, 1000)
-        document.addEventListener('keyup', moveFrog);
-    }
-})
+// startBtn.addEventListener('click', () => {
+//     if (timerId) {
+//         clearInterval(timerId)
+//         document.removeEventListener('keyup', moveFrog);
+//     } else {
+//         timerId = setInterval(movePieces, 1000)
+//         document.addEventListener('keyup', moveFrog);
+//     }
+// })
 
 (function start() {
     timerId = setInterval(movePieces, 1000)
